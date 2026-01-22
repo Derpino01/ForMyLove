@@ -16,43 +16,43 @@
         <section class="gallery-only">
             <h2 class="gallery-title">Photo Gallery</h2>
             <div class="gallery-grid">
-                <figure class="photo-card">
+                <figure class="photo-card reveal">
                     <img src="photo1.jpg" alt="Photo 1">
                     <figcaption>
                         <p class="love-letter">Baby I love you so much thank you for being with me for these past 7 months</p>
                     </figcaption>
                 </figure>
-                <figure class="photo-card">
+                <figure class="photo-card reveal">
                     <img src="photo2.jpg" alt="Photo 2">
                     <figcaption>
                         <p class="love-letter">Baby I love you so much thank you for being with me for these past 7 months</p>
                     </figcaption>
                 </figure>
-                <figure class="photo-card">
+                <figure class="photo-card reveal">
                     <img src="photo3.jpg" alt="Photo 3">
                     <figcaption>
                         <p class="love-letter">Baby I love you so much thank you for being with me for these past 7 months</p>
                     </figcaption>
                 </figure>
-                <figure class="photo-card">
+                <figure class="photo-card reveal">
                     <img src="photo4.jpg" alt="Photo 4">
                     <figcaption>
                         <p class="love-letter">Baby I love you so much thank you for being with me for these past 7 months</p>
                     </figcaption>
                 </figure>
-                <figure class="photo-card">
+                <figure class="photo-card reveal">
                     <img src="photo5.jpg" alt="Photo 5">
                     <figcaption>
                         <p class="love-letter">Baby I love you so much thank you for being with me for these past 7 months</p>
                     </figcaption>
                 </figure>
-                <figure class="photo-card">
+                <figure class="photo-card reveal">
                     <img src="photo6.jpg" alt="Photo 6">
                     <figcaption>
                         <p class="love-letter">Baby I love you so much thank you for being with me for these past 7 months</p>
                     </figcaption>
                 </figure>
-                <figure class="photo-card">
+                <figure class="photo-card reveal">
                     <img src="photo7.jpg" alt="Photo 7">
                     <figcaption>
                         <p class="love-letter">Baby I love you so much thank you for being with me for these past 7 months</p>
@@ -63,5 +63,84 @@
     </div>
 
     <div class="floating-hearts" aria-hidden="true"></div>
+    <script>
+    // Scroll reveal using IntersectionObserver
+    (function(){
+        const reveals = document.querySelectorAll('.reveal');
+        if('IntersectionObserver' in window){
+            const io = new IntersectionObserver((entries)=>{
+                entries.forEach(e=>{
+                    if(e.isIntersecting){
+                        e.target.classList.add('visible');
+                    }
+                });
+            },{threshold:0.12, rootMargin:'0px 0px -6% 0px'});
+            reveals.forEach(r=>io.observe(r));
+        } else {
+            // fallback
+            reveals.forEach(r=>r.classList.add('visible'));
+        }
+    })();
+
+    // Lightweight heart generator: spawns small hearts while scrolling.
+    (function(){
+        const body = document.body;
+        let lastSpawn = 0;
+        const MIN_INTERVAL = 180; // ms between hearts to avoid overload
+
+        function createHeart(x, y){
+            const el = document.createElement('div');
+            el.className = 'floating-heart heart-pop';
+            const size = 10 + Math.random()*18; // 10-28px
+            el.style.width = size + 'px';
+            el.style.height = size + 'px';
+            // position using viewport coords
+            el.style.left = (x - size/2) + 'px';
+            el.style.top = (y - size/2) + 'px';
+            // random color mix (soft pinks)
+            const hue = 330 + Math.round(Math.random()*20);
+            const sat = 70 + Math.round(Math.random()*10);
+            const light = 60 + Math.round(Math.random()*8);
+            el.innerHTML = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-8.5-6.1-8.5-11.2C3.5 6.3 6.7 4 9.3 4c1.6 0 2.7.9 2.7.9S13 4 14.7 4c2.6 0 5.8 2.3 5.8 5.8C20.5 14.9 12 21 12 21z" fill="hsla('+hue+','+sat+'%,'+light+'%,1)"/></svg>';
+            body.appendChild(el);
+            el.addEventListener('animationend', ()=> el.remove());
+        }
+
+        // spawn near a random vertical position; x along width
+        function spawnRandom(){
+            const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+            const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+            const x = 30 + Math.random()*(vw-60);
+            // spawn mostly in upper 85% of viewport to avoid obstructing bottom controls
+            const y = 30 + Math.random()*(vh*0.85-60);
+            createHeart(x,y);
+        }
+
+        // throttle via timestamps; attach to scroll + touchmove
+        function maybeSpawn(){
+            const now = Date.now();
+            if(now - lastSpawn > MIN_INTERVAL){
+                // spawn 1-2 hearts occasionally
+                const count = Math.random() < 0.65 ? 1 : 2;
+                for(let i=0;i<count;i++){
+                    // small stagger
+                    setTimeout(spawnRandom, i*60);
+                }
+                lastSpawn = now;
+            }
+        }
+
+        let ticking = false;
+        function onScroll(){
+            if(!ticking){
+                requestAnimationFrame(()=>{ maybeSpawn(); ticking=false });
+                ticking=true;
+            }
+        }
+
+        window.addEventListener('scroll', onScroll, {passive:true});
+        window.addEventListener('touchmove', onScroll, {passive:true});
+    })();
+    </script>
 </body>
 </html>

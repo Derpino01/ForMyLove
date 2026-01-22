@@ -133,27 +133,37 @@ a{color:var(--rose-600)}
   .entrance-card .names{font-size:30px}
 }
 
-/* Celebration gallery-only styles */
+/* Celebration gallery-only styles (stacked layout) */
 .gallery-only{max-width:980px; margin:20px auto 60px}
-.gallery-title{font-family:'Playfair Display', serif; color:var(--rose-800); text-align:left; margin:0 0 14px}
-.gallery-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:18px}
-.photo-card{background:var(--card-bg); border-radius:12px; overflow:hidden; box-shadow:0 12px 30px rgba(139,16,49,0.08); display:flex; flex-direction:column}
-.photo-card img{width:100%; height:280px; object-fit:cover; display:block}
+.gallery-title{font-family:'Playfair Display', serif; color:var(--rose-800); text-align:left; margin:0 0 18px}
+.gallery-grid{display:block; width:100%; max-width:760px; margin:0 auto}
+.photo-card{background:var(--card-bg); border-radius:12px; overflow:hidden; box-shadow:0 10px 28px rgba(139,16,49,0.08); display:flex; flex-direction:column; margin-bottom:22px}
+.photo-card img{width:100%; height:auto; max-height:620px; object-fit:cover; display:block}
+.photo-card figcaption{padding:18px 20px 22px 20px; display:flex; flex-direction:column; gap:10px}
+.love-letter{width:100%; border-radius:8px; padding:0; border-top:1px solid rgba(225,29,72,0.04); background:transparent; font-family:'Playfair Display', serif; font-size:16px; color:var(--rose-800); line-height:1.6; margin:0; text-align:left}
 
 /* Soft hover and focus */
 .photo-card:hover{transform:translateY(-6px); transition:transform .22s ease, box-shadow .22s ease}
 .photo-card:focus-within{box-shadow:0 18px 40px rgba(225,29,72,0.14)}
-.photo-card figcaption{padding:14px; display:flex; flex-direction:column; gap:10px}
-.love-letter{width:100%; border-radius:8px; padding:8px 0 12px 0; border-top:1px solid rgba(225,29,72,0.04); background:transparent; font-family:'Playfair Display', serif; font-size:16px; color:var(--rose-800); line-height:1.6; margin:0; text-align:left}
 
-/* Responsive columns */
+/* Reveal animations for scroll */
+.reveal{opacity:0; transform:translateY(18px); will-change:opacity, transform}
+.reveal.visible{opacity:1; transform:translateY(0); transition:transform .6s cubic-bezier(.2,.9,.2,1), opacity .6s ease}
+
+/* Floating hearts (small, performant) */
+.floating-heart{position:fixed; pointer-events:none; z-index:6; width:18px; height:18px; transform-origin:center; will-change:transform, opacity}
+.floating-heart svg{width:100%; height:100%; display:block}
+.heart-pop{animation:heartPop .9s cubic-bezier(.2,.9,.2,1) forwards}
+@keyframes heartPop{0%{opacity:0; transform:scale(0.2) translateY(0)}30%{opacity:1; transform:scale(1.05) translateY(-6px)}100%{opacity:0; transform:scale(0.9) translateY(-22px)}}
+
+/* Responsive tweaks for stacked layout */
 @media (max-width:980px){
-  .gallery-grid{grid-template-columns:repeat(2, 1fr)}
-  .photo-card img{height:240px}
+  .gallery-grid{max-width:640px}
+  .photo-card img{max-height:520px}
 }
 @media (max-width:560px){
-  .gallery-grid{grid-template-columns:1fr}
-  .photo-card img{height:220px}
+  .gallery-grid{max-width:420px}
+  .photo-card img{max-height:420px}
   .gallery-only{padding:0 12px}
 }
 
