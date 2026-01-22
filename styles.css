@@ -109,3 +109,26 @@ h2::after{content:'❤'; color:var(--rose-400); font-size:18px; margin-left:6px;
 /* Small accessibility/finesse */
 a{color:var(--rose-600)}
 ::selection{background:var(--rose-200)}
+
+/* Entrance (password) specific styles */
+.entrance-wrapper{min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px}
+.entrance-card{max-width:460px; text-align:center; padding:36px; position:relative}
+.entrance-card .names{font-size:40px; margin-bottom:6px}
+.entrance-card .sub{color:var(--muted); margin-top:0; margin-bottom:18px}
+.login-form{display:flex; flex-direction:column; gap:12px; align-items:stretch}
+.password-input{padding:12px 14px; border-radius:12px; border:1px solid rgba(139,16,49,0.12); font-size:16px; transition:box-shadow .2s ease, transform .08s ease}
+.password-input:focus{box-shadow:0 8px 28px rgba(225,29,72,0.12); transform:translateY(-2px); outline:none}
+.enter-btn{padding:12px 16px; border-radius:12px; font-size:16px}
+.hint{margin-top:10px; color:var(--rose-600)}
+.error{min-height:20px; color:#8b1031; font-size:14px; margin-top:4px}
+.shake{animation:shake .5s}
+@keyframes shake{10%{transform:translateX(-6px)}30%{transform:translateX(6px)}50%{transform:translateX(-4px)}70%{transform:translateX(4px)}90%{transform:translateX(-2px)}100%{transform:translateX(0)}}
+
+/* Button hover/glow */
+.btn.primary{transition:transform .18s ease, box-shadow .18s ease, filter .18s ease}
+.btn.primary:hover{transform:translateY(-3px) scale(1.02); filter:drop-shadow(0 12px 30px rgba(225,29,72,0.18))}
+
+@media (max-width:520px){
+  .entrance-card{padding:26px}
+  .entrance-card .names{font-size:30px}
+}
