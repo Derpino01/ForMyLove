@@ -9,12 +9,12 @@
 <body>
     <div class="container">
         <header class="site-header">
-            <h1 class="names">You &amp; Me</h1>
+            <h1 class="names">You  &amp;  Me</h1>
             <p class="date">Our Monthsary — <time datetime="2025-06-21">June 21, 2025</time></p>
         </header>
 
         <section class="gallery-only">
-            <h2 class="gallery-title">Photo Gallery</h2>
+            <h2 class="gallery-title">I LOVE YOU BABY</h2>
             <div class="gallery-grid">
                 <figure class="photo-card reveal">
                     <img src="1.jpeg" alt="Photo 1">
@@ -86,12 +86,12 @@
         (function(){
             const body = document.body;
             let lastSpawn = 0;
-            const MIN_INTERVAL = 120; // ms between hearts to allow more frequent hearts
+            const MIN_INTERVAL = 60; // ms between hearts to allow denser hearts
 
             function createHeart(x, y){
                 const el = document.createElement('div');
                 el.className = 'floating-heart heart-pop';
-                const size = 10 + Math.random()*26; // 10-36px
+                const size = 12 + Math.random()*32; // 12-44px
                 el.style.width = size + 'px';
                 el.style.height = size + 'px';
                 el.style.left = (x - size/2) + 'px';
@@ -116,8 +116,8 @@
             function maybeSpawn(){
                 const now = Date.now();
                 if(now - lastSpawn > MIN_INTERVAL){
-                    const count = Math.random() < 0.5 ? 1 : (Math.random() < 0.6 ? 2 : 3);
-                    for(let i=0;i<count;i++) setTimeout(spawnRandom, i*40);
+                    const count = 1 + Math.floor(Math.random()*5); // spawn 1-5 hearts
+                    for(let i=0;i<count;i++) setTimeout(spawnRandom, i*30 + Math.random()*40);
                     lastSpawn = now;
                 }
             }

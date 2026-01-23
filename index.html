@@ -83,7 +83,7 @@
                 const rect = form.getBoundingClientRect();
                 const cx = rect.left + rect.width/2;
                 const cy = rect.top + rect.height/2;
-                for(let i=0;i<8;i++){
+                for(let i=0;i<18;i++){
                     const h = document.createElement('span');
                     h.className = 't-heart';
                     const size = 8 + Math.random()*18;
@@ -100,8 +100,8 @@
                     h.addEventListener('animationend', ()=> h.remove());
                 }
 
-                // redirect after ~1.4s
-                setTimeout(()=> window.location.href = 'celebration.html', 1400);
+                // redirect after animation completes (~2.8s)
+                setTimeout(()=> window.location.href = 'celebration.html', 2800);
             }
 
             form.addEventListener('submit', function(e){
