@@ -13,8 +13,16 @@
             <p class="sub">Enter the Password</p>
 
             <form id="loginForm" class="login-form" novalidate>
-                <label class="sr-only" for="pass">Our Day</label>
-                <input id="pass" name="pass" type="password" autocomplete="current-password" placeholder="Enter password" required aria-required="true" class="password-input">
+                <div class="date-inputs" role="group" aria-label="Enter our special date">
+                    <label class="sr-only" for="month">Month</label>
+                    <input id="month" name="month" type="text" inputmode="text" placeholder="Month" class="date-input" autocomplete="off" aria-label="Month">
+
+                    <label class="sr-only" for="day">Day</label>
+                    <input id="day" name="day" type="text" inputmode="numeric" placeholder="Day" class="date-input" autocomplete="off" aria-label="Day">
+
+                    <label class="sr-only" for="year">Year</label>
+                    <input id="year" name="year" type="text" inputmode="numeric" placeholder="Year" class="date-input" autocomplete="off" aria-label="Year">
+                </div>
 
                 <div id="error" class="error" aria-live="polite" role="status"></div>
 
@@ -32,7 +40,6 @@
         (function(){
             const correct = 'iloveyou';
             const form = document.getElementById('loginForm');
-            const pass = document.getElementById('pass');
             const err = document.getElementById('error');
             const overlay = document.getElementById('transitionOverlay');
             const card = document.querySelector('.entrance-card');
@@ -44,51 +51,62 @@
             }
 
             function playTransitionAndRedirect(){
-                // disable input
+                // disable button and inputs
                 form.querySelector('button').disabled = true;
-                pass.disabled = true;
-                // gently shrink card for depth
+                ['month','day','year'].forEach(id=>document.getElementById(id).disabled = true);
                 card.classList.add('closing');
-                // show overlay
                 overlay.classList.add('play');
 
-                // spawn a cluster of hearts around the form center
+                // big purple heart
+                const big = document.createElement('div');
+                big.className = 't-big-heart';
+                big.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-8.5-6.1-8.5-11.2C3.5 6.3 6.7 4 9.3 4c1.6 0 2.7.9 2.7.9S13 4 14.7 4c2.6 0 5.8 2.3 5.8 5.8C20.5 14.9 12 21 12 21z"/></svg>';
+                overlay.appendChild(big);
+
+                // trigger appear
+                requestAnimationFrame(()=> big.classList.add('pop'));
+
+                // also spawn a few small hearts for sparkle
                 const rect = form.getBoundingClientRect();
                 const cx = rect.left + rect.width/2;
                 const cy = rect.top + rect.height/2;
-                for(let i=0;i<12;i++){
+                for(let i=0;i<8;i++){
                     const h = document.createElement('span');
                     h.className = 't-heart';
-                    const size = 8 + Math.random()*20;
+                    const size = 8 + Math.random()*18;
                     h.style.width = size+'px';
                     h.style.height = size+'px';
-                    const dx = (Math.random()-0.5)*rect.width*0.7;
-                    const dy = (Math.random()-0.5)*rect.height*0.4;
+                    const dx = (Math.random()-0.5)*rect.width*0.8;
+                    const dy = (Math.random()-0.5)*rect.height*0.5;
                     h.style.left = (cx + dx - size/2) + 'px';
                     h.style.top = (cy + dy - size/2) + 'px';
-                    const hue = 330 + Math.round(Math.random()*18);
+                    const hue = 265 + Math.round(Math.random()*20); // purple-leaning
                     h.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-8.5-6.1-8.5-11.2C3.5 6.3 6.7 4 9.3 4c1.6 0 2.7.9 2.7.9S13 4 14.7 4c2.6 0 5.8 2.3 5.8 5.8C20.5 14.9 12 21 12 21z" fill="hsla('+hue+',72%,64%,1)"/></svg>';
                     overlay.appendChild(h);
                     h.style.animationDelay = (Math.random()*0.6)+'s';
                     h.addEventListener('animationend', ()=> h.remove());
                 }
 
-                // redirect after animation (~1.4s)
+                // redirect after ~1.4s
                 setTimeout(()=> window.location.href = 'celebration.html', 1400);
             }
 
             form.addEventListener('submit', function(e){
                 e.preventDefault();
-                const val = pass.value.trim();
-                if(!val){
-                    showError('Please enter the password ❤️');
+                const m = document.getElementById('month').value.trim();
+                const d = document.getElementById('day').value.trim();
+                const y = document.getElementById('year').value.trim();
+                // expected values: June, 21, 2025 (case-insensitive for month)
+                if(!m || !d || !y){
+                    showError('Please enter the full date ❤️');
                     return;
                 }
-                if(val.toLowerCase() === correct){
+                if(m.toLowerCase() === 'june' && d === '21' && y === '2025'){
                     playTransitionAndRedirect();
                 } else {
-                    pass.value = '';
-                    showError('Wrong password, try again ❤️');
+                    document.getElementById('day').value = '';
+                    document.getElementById('year').value = '';
+                    showError('Wrong date, try again ❤️');
                 }
             });
         })();
