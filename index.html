@@ -44,6 +44,19 @@
             const overlay = document.getElementById('transitionOverlay');
             const card = document.querySelector('.entrance-card');
 
+            // create subtle static background hearts on load
+            (function createStaticBackgroundHearts(){
+                const container = document.querySelector('.floating-hearts');
+                if(!container) return;
+                const counts = [ {x:'6%', y:'10%', s:120, o:0.04}, {x:'92%', y:'14%', s:80, o:0.03}, {x:'18%', y:'78%', s:150, o:0.03}, {x:'84%', y:'82%', s:100, o:0.025} ];
+                counts.forEach(c=>{
+                    const el = document.createElement('span');
+                    el.className = 'bg-heart';
+                    el.style.left = c.x; el.style.top = c.y; el.style.width = c.s+'px'; el.style.height = c.s+'px'; el.style.opacity = c.o; el.style.fontSize = c.s+'px';
+                    container.appendChild(el);
+                });
+            })();
+
             function showError(msg){
                 err.textContent = msg;
                 err.classList.add('shake');
@@ -60,7 +73,7 @@
                 // big purple heart
                 const big = document.createElement('div');
                 big.className = 't-big-heart';
-                big.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-8.5-6.1-8.5-11.2C3.5 6.3 6.7 4 9.3 4c1.6 0 2.7.9 2.7.9S13 4 14.7 4c2.6 0 5.8 2.3 5.8 5.8C20.5 14.9 12 21 12 21z"/></svg>';
+                big.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-8.5-6.1-8.5-11.2C3.5 6.3 6.7 4 9.3 4c1.6 0 2.7.9 2.7.9S13 4 14.7 4c2.6 0 5.8 2.3 5.8 5.8C20.5 14.9 12 21 12 21z" fill="hsla(260,82%,60%,1)"/></svg>';
                 overlay.appendChild(big);
 
                 // trigger appear
@@ -80,7 +93,7 @@
                     const dy = (Math.random()-0.5)*rect.height*0.5;
                     h.style.left = (cx + dx - size/2) + 'px';
                     h.style.top = (cy + dy - size/2) + 'px';
-                    const hue = 265 + Math.round(Math.random()*20); // purple-leaning
+                        const hue = 220 + Math.round(Math.random()*60); // purple -> light-blue range
                     h.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-8.5-6.1-8.5-11.2C3.5 6.3 6.7 4 9.3 4c1.6 0 2.7.9 2.7.9S13 4 14.7 4c2.6 0 5.8 2.3 5.8 5.8C20.5 14.9 12 21 12 21z" fill="hsla('+hue+',72%,64%,1)"/></svg>';
                     overlay.appendChild(h);
                     h.style.animationDelay = (Math.random()*0.6)+'s';

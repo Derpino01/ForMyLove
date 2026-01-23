@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
 
 :root{
-  --bg-1: #fff6f8;
-  --bg-2: #fff0f4;
-  --rose-50: #fff0f6;
-  --rose-100: #ffd6e6;
-  --rose-200: #ffb3d1;
-  --rose-400: #ff6fae;
-  --rose-600: #e11d48;
-  --rose-800: #8b1031;
-  --gold: #b8860b;
-  --muted: #6b6b6b;
-  --card-bg: rgba(255,255,255,0.85);
+  --bg-1: #eef2ff; /* light blue */
+  --bg-2: #f3e8ff; /* light purple */
+  --purple-50: #f5f3ff;
+  --purple-100: #ede9fe;
+  --purple-200: #d6bbfb;
+  --purple-400: #8b5cf6;
+  --purple-600: #6d28d9;
+  --purple-800: #4c1d95;
+  --blue-200: #bfdbfe;
+  --blue-400: #60a5fa;
+  --muted: #5b6470;
+  --card-bg: rgba(255,255,255,0.9);
 }
 
 /* Base layout */
@@ -19,33 +20,34 @@
 html,body{height:100%}
 body{
   font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  margin:0; padding:28px; color:#222; background: linear-gradient(135deg,var(--bg-1),var(--bg-2));
+  margin:0; padding:28px; color:#1b1b2e; background: linear-gradient(135deg,var(--bg-1),var(--bg-2));
   -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; position:relative; overflow-x:hidden;
 }
 
 /* Subtle patterned overlay (hearts) */
 .floating-hearts{
-  position:fixed; inset:0; pointer-events:none; z-index:0; opacity:0.18; mix-blend-mode:screen;
+  position:fixed; inset:0; pointer-events:none; z-index:0; opacity:0.16; mix-blend-mode:screen;
+  /* subtle purple heart-like soft blobs as background accents */
   background-image:
-    radial-gradient(circle at 10% 20%, rgba(255,82,148,0.14) 0 8px, transparent 9px),
-    radial-gradient(circle at 80% 30%, rgba(255,193,204,0.12) 0 10px, transparent 11px),
-    radial-gradient(circle at 40% 80%, rgba(255,150,180,0.10) 0 12px, transparent 13px);
+    radial-gradient(circle at 8% 18%, rgba(139,92,246,0.06) 0 18px, transparent 22px),
+    radial-gradient(circle at 82% 28%, rgba(96,165,250,0.05) 0 20px, transparent 26px),
+    radial-gradient(circle at 42% 78%, rgba(139,92,246,0.04) 0 22px, transparent 28px);
 }
 
 /* Decorative floating hearts (using CSS animation via pseudo elements on body) */
 body::before, body::after{
   content:''; position:fixed; left:50%; top:-10%; width:120vmax; height:120vmax; transform:translateX(-50%);
-  background-image: radial-gradient(circle at 20% 30%, rgba(255,105,180,0.02) 0 2%, transparent 3%),
-    radial-gradient(circle at 80% 60%, rgba(255,182,193,0.02) 0 2%, transparent 3%);
-  z-index:0; pointer-events:none; animation: drift 18s linear infinite;
+  background-image: radial-gradient(circle at 18% 28%, rgba(139,92,246,0.02) 0 2%, transparent 3%),
+    radial-gradient(circle at 78% 60%, rgba(96,165,250,0.02) 0 2%, transparent 3%);
+  z-index:0; pointer-events:none; animation: drift 20s linear infinite;
 }
 @keyframes drift{0%{transform:translateX(-50%) translateY(0) rotate(0)}50%{transform:translateX(-55%) translateY(-2%) rotate(3deg)}100%{transform:translateX(-50%) translateY(0) rotate(0)}}
 
 /* Container */
 .container{position:relative; max-width:980px; margin:36px auto; z-index:5}
 
-.site-header{background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.5)); padding:20px; border-radius:14px; text-align:center; margin-bottom:18px; box-shadow:0 6px 20px rgba(139,16,49,0.06)}
-.names{font-family:'Great Vibes', 'Playfair Display', serif; font-size:48px; margin:0; color:var(--rose-800); text-shadow:0 2px 0 rgba(255,255,255,0.6)}
+.site-header{background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.5)); padding:20px; border-radius:14px; text-align:center; margin-bottom:18px; box-shadow:0 6px 20px rgba(76,29,149,0.06)}
+.names{font-family:'Great Vibes', 'Playfair Display', serif; font-size:48px; margin:0; color:var(--purple-800); text-shadow:0 2px 0 rgba(255,255,255,0.6)}
 .date{margin:6px 0 0; color:var(--muted); font-size:14px}
 
 .lead{font-size:16px; color:#4a4a4a; margin:0 0 12px}
@@ -57,34 +59,34 @@ body::before, body::after{
 /* Form */
 .field{display:flex; flex-direction:column; gap:6px; margin-bottom:8px}
 label{font-size:13px; color:#333}
-input[type=text], input[type=email], input[type=password]{padding:10px 12px; border:1px solid rgba(139,16,49,0.12); border-radius:10px; font-size:14px}
-input:focus{outline:none; box-shadow:0 6px 18px rgba(225,29,72,0.08); border-color:var(--rose-400)}
+input[type=text], input[type=email], input[type=password]{padding:10px 12px; border:1px solid rgba(76,29,149,0.12); border-radius:10px; font-size:14px}
+input:focus{outline:none; box-shadow:0 6px 18px rgba(76,29,149,0.08); border-color:var(--purple-400)}
 
 /* Buttons */
 .btn{display:inline-block; padding:10px 16px; font-weight:600; border-radius:10px; cursor:pointer; transition:transform .18s ease, box-shadow .18s ease; border:1px solid transparent}
-.btn:focus{outline:3px solid rgba(255,182,193,0.28)}
-.btn.primary{background:linear-gradient(90deg,var(--rose-400),var(--rose-600)); color:#fff; box-shadow:0 8px 22px rgba(225,29,72,0.16)}
-.btn.primary:hover{transform:translateY(-3px); box-shadow:0 14px 34px rgba(225,29,72,0.2)}
-.btn.outline{background:transparent; color:var(--rose-600); border-color:rgba(225,29,72,0.08)}
-.btn.outline:hover{background:linear-gradient(90deg, rgba(255,215,230,0.6), rgba(255,244,245,0.6))}
-.btn.ghost{background:transparent; color:var(--rose-800);}
+.btn:focus{outline:3px solid rgba(171,145,255,0.28)}
+.btn.primary{background:linear-gradient(90deg,var(--purple-400),var(--blue-400)); color:#fff; box-shadow:0 8px 22px rgba(76,29,149,0.12)}
+.btn.primary:hover{transform:translateY(-3px); box-shadow:0 14px 34px rgba(76,29,149,0.16)}
+.btn.outline{background:transparent; color:var(--purple-600); border-color:rgba(76,29,149,0.08)}
+.btn.outline:hover{background:linear-gradient(90deg, rgba(235,224,255,0.6), rgba(232,244,255,0.6))}
+.btn.ghost{background:transparent; color:var(--purple-800);}
 
 /* Gallery */
 .gallery-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:12px 0}
-.photo{height:110px; border-radius:10px; background:linear-gradient(135deg,#ffeef6,#fff1f8); display:flex; align-items:center; justify-content:center; color:var(--rose-800); box-shadow:0 8px 20px rgba(223,82,125,0.06); font-weight:600}
+.photo{height:110px; border-radius:10px; background:linear-gradient(135deg,#eef6ff,#f3efff); display:flex; align-items:center; justify-content:center; color:var(--purple-800); box-shadow:0 8px 20px rgba(76,29,149,0.06); font-weight:600}
 
 /* Love message */
-.love-message blockquote{font-family:'Playfair Display', serif; font-size:20px; margin:10px 0; color:var(--rose-800); line-height:1.4}
+.love-message blockquote{font-family:'Playfair Display', serif; font-size:20px; margin:10px 0; color:var(--purple-800); line-height:1.4}
 
 /* Timeline */
 .timeline-list{list-style:none; padding-left:0; margin:12px 0}
-.timeline-list li{position:relative; padding:14px 16px 14px 56px; border-radius:8px; margin-bottom:12px; background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,245,247,0.6)); box-shadow:0 6px 18px rgba(139,16,49,0.04)}
-.timeline-list li time{position:absolute; left:16px; top:14px; width:36px; height:36px; border-radius:50%; background:linear-gradient(90deg,var(--rose-400),var(--rose-600)); color:white; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; box-shadow:0 6px 16px rgba(225,29,72,0.14)}
+.timeline-list li{position:relative; padding:14px 16px 14px 56px; border-radius:8px; margin-bottom:12px; background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(243,241,255,0.6)); box-shadow:0 6px 18px rgba(76,29,149,0.04)}
+.timeline-list li time{position:absolute; left:16px; top:14px; width:36px; height:36px; border-radius:50%; background:linear-gradient(90deg,var(--purple-400),var(--purple-600)); color:white; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; box-shadow:0 6px 16px rgba(76,29,149,0.14)}
 .timeline-list li p{margin:0; color:#444}
 
 /* Decorative small heart on headings */
-h2{font-family:'Playfair Display', serif; color:var(--rose-800); display:flex; align-items:center; gap:10px}
-h2::after{content:'❤'; color:var(--rose-400); font-size:18px; margin-left:6px; transform:translateY(-1px); opacity:0.9}
+h2{font-family:'Playfair Display', serif; color:var(--purple-800); display:flex; align-items:center; gap:10px}
+h2::after{content:'❤'; color:var(--purple-400); font-size:18px; margin-left:6px; transform:translateY(-1px); opacity:0.95}
 
 /* Hover warm inviting effects */
 .card:hover{transform:translateY(-4px); transition:transform .22s ease, box-shadow .22s ease}
@@ -107,8 +109,8 @@ h2::after{content:'❤'; color:var(--rose-400); font-size:18px; margin-left:6px;
 }
 
 /* Small accessibility/finesse */
-a{color:var(--rose-600)}
-::selection{background:var(--rose-200)}
+a{color:var(--purple-600)}
+::selection{background:var(--purple-200)}
 
 /* Entrance (password) specific styles */
 .entrance-wrapper{min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px}
@@ -116,17 +118,17 @@ a{color:var(--rose-600)}
 .entrance-card .names{font-size:40px; margin-bottom:6px}
 .entrance-card .sub{color:var(--muted); margin-top:0; margin-bottom:18px}
 .login-form{display:flex; flex-direction:column; gap:12px; align-items:stretch}
-.password-input{padding:12px 14px; border-radius:12px; border:1px solid rgba(139,16,49,0.12); font-size:16px; transition:box-shadow .2s ease, transform .08s ease}
-.password-input:focus{box-shadow:0 8px 28px rgba(225,29,72,0.12); transform:translateY(-2px); outline:none}
+.password-input{padding:12px 14px; border-radius:12px; border:1px solid rgba(76,29,149,0.12); font-size:16px; transition:box-shadow .2s ease, transform .08s ease}
+.password-input:focus{box-shadow:0 8px 28px rgba(76,29,149,0.12); transform:translateY(-2px); outline:none}
 .enter-btn{padding:12px 16px; border-radius:12px; font-size:16px}
-.hint{margin-top:10px; color:var(--rose-600)}
-.error{min-height:20px; color:#8b1031; font-size:14px; margin-top:4px}
+.hint{margin-top:10px; color:var(--purple-600)}
+.error{min-height:20px; color:var(--purple-800); font-size:14px; margin-top:4px}
 .shake{animation:shake .5s}
 @keyframes shake{10%{transform:translateX(-6px)}30%{transform:translateX(6px)}50%{transform:translateX(-4px)}70%{transform:translateX(4px)}90%{transform:translateX(-2px)}100%{transform:translateX(0)}}
 
 /* Button hover/glow */
 .btn.primary{transition:transform .18s ease, box-shadow .18s ease, filter .18s ease}
-.btn.primary:hover{transform:translateY(-3px) scale(1.02); filter:drop-shadow(0 12px 30px rgba(225,29,72,0.18))}
+.btn.primary:hover{transform:translateY(-3px) scale(1.02); filter:drop-shadow(0 12px 30px rgba(76,29,149,0.18))}
 
 @media (max-width:520px){
   .entrance-card{padding:26px}
@@ -135,16 +137,16 @@ a{color:var(--rose-600)}
 
 /* Celebration gallery-only styles (stacked layout) */
 .gallery-only{max-width:980px; margin:20px auto 60px}
-.gallery-title{font-family:'Playfair Display', serif; color:var(--rose-800); text-align:left; margin:0 0 18px}
+.gallery-title{font-family:'Playfair Display', serif; color:var(--purple-800); text-align:left; margin:0 0 18px}
 .gallery-grid{display:block; width:100%; max-width:760px; margin:0 auto}
 .photo-card{background:var(--card-bg); border-radius:12px; overflow:hidden; box-shadow:0 10px 28px rgba(139,16,49,0.08); display:flex; flex-direction:column; margin-bottom:22px}
 .photo-card img{width:100%; height:auto; max-height:620px; object-fit:cover; display:block}
 .photo-card figcaption{padding:18px 20px 22px 20px; display:flex; flex-direction:column; gap:10px}
-.love-letter{width:100%; border-radius:8px; padding:0; border-top:1px solid rgba(225,29,72,0.04); background:transparent; font-family:'Playfair Display', serif; font-size:16px; color:var(--rose-800); line-height:1.6; margin:0; text-align:left}
+.love-letter{width:100%; border-radius:8px; padding:0; border-top:1px solid rgba(76,29,149,0.04); background:transparent; font-family:'Playfair Display', serif; font-size:16px; color:var(--purple-800); line-height:1.6; margin:0; text-align:left}
 
 /* Soft hover and focus */
 .photo-card:hover{transform:translateY(-6px); transition:transform .22s ease, box-shadow .22s ease}
-.photo-card:focus-within{box-shadow:0 18px 40px rgba(225,29,72,0.14)}
+.photo-card:focus-within{box-shadow:0 18px 40px rgba(76,29,149,0.14)}
 
 /* Reveal animations for scroll */
 .reveal{opacity:0; transform:translateY(18px); will-change:opacity, transform}
@@ -155,6 +157,11 @@ a{color:var(--rose-600)}
 .floating-heart svg{width:100%; height:100%; display:block}
 .heart-pop{animation:heartPop .9s cubic-bezier(.2,.9,.2,1) forwards}
 @keyframes heartPop{0%{opacity:0; transform:scale(0.2) translateY(0)}30%{opacity:1; transform:scale(1.05) translateY(-6px)}100%{opacity:0; transform:scale(0.9) translateY(-22px)}}
+
+/* background static hearts */
+.bg-heart{position:absolute; pointer-events:none; display:block; z-index:0; transform:translate(-50%,-50%) rotate(-10deg); background:transparent}
+.bg-heart::before{content:'❤'; position:absolute; left:0; top:0; font-size:inherit; color:var(--purple-400); opacity:0.12; transform:translate(-5%, -5%) rotate(-8deg)}
+
 
 /* Responsive tweaks for stacked layout */
 @media (max-width:980px){
@@ -170,7 +177,7 @@ a{color:var(--rose-600)}
 /* Transition overlay for entrance -> celebration */
 .transition-overlay{position:fixed; inset:0; pointer-events:none; z-index:80; opacity:0; display:block}
 .transition-overlay.play{pointer-events:auto; animation:overlayIn 1.4s forwards}
-@keyframes overlayIn{0%{background:rgba(255,245,247,0); opacity:0}30%{background:rgba(255,240,245,0.72); opacity:0.95}100%{background:rgba(255,240,245,1); opacity:1}}
+@keyframes overlayIn{0%{background:rgba(238,242,255,0); opacity:0}30%{background:rgba(230,226,255,0.78); opacity:0.95}100%{background:rgba(230,226,255,1); opacity:1}}
 
 /* hearts used during transition */
 .t-heart{position:fixed; pointer-events:none; z-index:82; display:block; transform-origin:center; will-change:transform, opacity}
@@ -183,13 +190,13 @@ a{color:var(--rose-600)}
 
 /* Date input group styling */
 .date-inputs{display:flex; gap:12px; justify-content:center; align-items:center; margin-bottom:12px}
-.date-input{min-width:100px; max-width:160px; padding:10px 12px; border-radius:12px; border:1px solid rgba(139,16,49,0.12); background:linear-gradient(180deg, rgba(255,250,252,0.9), rgba(255,245,247,0.95)); font-family:'Poppins', sans-serif; font-size:16px; color:var(--rose-800); text-align:center; box-shadow:0 6px 18px rgba(225,29,72,0.04)}
-.date-input::placeholder{color:rgba(139,16,49,0.28)}
-.date-input:focus{outline:none; box-shadow:0 10px 28px rgba(139,16,49,0.10); transform:translateY(-2px)}
+.date-input{min-width:100px; max-width:160px; padding:10px 12px; border-radius:12px; border:1px solid rgba(76,29,149,0.12); background:linear-gradient(180deg, rgba(245,243,255,0.9), rgba(240,247,255,0.95)); font-family:'Poppins', sans-serif; font-size:16px; color:var(--purple-800); text-align:center; box-shadow:0 6px 18px rgba(76,29,149,0.04)}
+.date-input::placeholder{color:rgba(76,29,149,0.28)}
+.date-input:focus{outline:none; box-shadow:0 10px 28px rgba(76,29,149,0.10); transform:translateY(-2px)}
 
 /* Big purple heart for transition */
 .t-big-heart{position:fixed; left:50%; top:45%; transform:translate(-50%,-50%) scale(0.2); z-index:83; width:160px; height:160px; opacity:0}
-.t-big-heart svg{width:100%; height:100%; display:block; filter:drop-shadow(0 18px 42px rgba(139,16,49,0.18));}
+.t-big-heart svg{width:100%; height:100%; display:block; filter:drop-shadow(0 18px 42px rgba(76,29,149,0.18));}
 .t-big-heart.pop{animation:bigPop 1.2s cubic-bezier(.2,.9,.2,1) forwards}
 @keyframes bigPop{0%{opacity:0; transform:translate(-50%,-50%) scale(0.2)}35%{opacity:1; transform:translate(-50%,-50%) scale(1.08)}100%{opacity:0; transform:translate(-50%,-86%) scale(0.9)}}
 

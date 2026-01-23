@@ -82,65 +82,71 @@
         }
     })();
 
-    // Lightweight heart generator: spawns small hearts while scrolling.
-    (function(){
-        const body = document.body;
-        let lastSpawn = 0;
-        const MIN_INTERVAL = 180; // ms between hearts to avoid overload
+        // Lightweight heart generator: spawns small purple/light-blue hearts while scrolling.
+        (function(){
+            const body = document.body;
+            let lastSpawn = 0;
+            const MIN_INTERVAL = 120; // ms between hearts to allow more frequent hearts
 
-        function createHeart(x, y){
-            const el = document.createElement('div');
-            el.className = 'floating-heart heart-pop';
-            const size = 10 + Math.random()*18; // 10-28px
-            el.style.width = size + 'px';
-            el.style.height = size + 'px';
-            // position using viewport coords
-            el.style.left = (x - size/2) + 'px';
-            el.style.top = (y - size/2) + 'px';
-            // random color mix (soft pinks)
-            const hue = 330 + Math.round(Math.random()*20);
-            const sat = 70 + Math.round(Math.random()*10);
-            const light = 60 + Math.round(Math.random()*8);
-            el.innerHTML = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-8.5-6.1-8.5-11.2C3.5 6.3 6.7 4 9.3 4c1.6 0 2.7.9 2.7.9S13 4 14.7 4c2.6 0 5.8 2.3 5.8 5.8C20.5 14.9 12 21 12 21z" fill="hsla('+hue+','+sat+'%,'+light+'%,1)"/></svg>';
-            body.appendChild(el);
-            el.addEventListener('animationend', ()=> el.remove());
-        }
+            function createHeart(x, y){
+                const el = document.createElement('div');
+                el.className = 'floating-heart heart-pop';
+                const size = 10 + Math.random()*26; // 10-36px
+                el.style.width = size + 'px';
+                el.style.height = size + 'px';
+                el.style.left = (x - size/2) + 'px';
+                el.style.top = (y - size/2) + 'px';
+                // hue range includes light-blue to purple (200-280)
+                const hue = 200 + Math.round(Math.random()*80);
+                const sat = 60 + Math.round(Math.random()*20);
+                const light = 55 + Math.round(Math.random()*10);
+                el.innerHTML = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-8.5-6.1-8.5-11.2C3.5 6.3 6.7 4 9.3 4c1.6 0 2.7.9 2.7.9S13 4 14.7 4c2.6 0 5.8 2.3 5.8 5.8C20.5 14.9 12 21 12 21z" fill="hsla('+hue+','+sat+'%,'+light+'%,0.98)"/></svg>';
+                body.appendChild(el);
+                el.addEventListener('animationend', ()=> el.remove());
+            }
 
-        // spawn near a random vertical position; x along width
-        function spawnRandom(){
-            const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-            const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-            const x = 30 + Math.random()*(vw-60);
-            // spawn mostly in upper 85% of viewport to avoid obstructing bottom controls
-            const y = 30 + Math.random()*(vh*0.85-60);
-            createHeart(x,y);
-        }
+            function spawnRandom(){
+                const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+                const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+                const x = 20 + Math.random()*(vw-40);
+                const y = 20 + Math.random()*(vh-40);
+                createHeart(x,y);
+            }
 
-        // throttle via timestamps; attach to scroll + touchmove
-        function maybeSpawn(){
-            const now = Date.now();
-            if(now - lastSpawn > MIN_INTERVAL){
-                // spawn 1-2 hearts occasionally
-                const count = Math.random() < 0.65 ? 1 : 2;
-                for(let i=0;i<count;i++){
-                    // small stagger
-                    setTimeout(spawnRandom, i*60);
+            function maybeSpawn(){
+                const now = Date.now();
+                if(now - lastSpawn > MIN_INTERVAL){
+                    const count = Math.random() < 0.5 ? 1 : (Math.random() < 0.6 ? 2 : 3);
+                    for(let i=0;i<count;i++) setTimeout(spawnRandom, i*40);
+                    lastSpawn = now;
                 }
-                lastSpawn = now;
             }
-        }
 
-        let ticking = false;
-        function onScroll(){
-            if(!ticking){
-                requestAnimationFrame(()=>{ maybeSpawn(); ticking=false });
-                ticking=true;
+            let ticking = false;
+            function onScroll(){
+                if(!ticking){
+                    requestAnimationFrame(()=>{ maybeSpawn(); ticking=false });
+                    ticking=true;
+                }
             }
-        }
 
-        window.addEventListener('scroll', onScroll, {passive:true});
-        window.addEventListener('touchmove', onScroll, {passive:true});
-    })();
+            // create a few subtle static background hearts at load
+            function createStaticBackgroundHearts(){
+                const container = document.querySelector('.floating-hearts');
+                if(!container) return;
+                const counts = [ {x:'6%', y:'8%', s:120, o:0.04}, {x:'92%', y:'12%', s:80, o:0.03}, {x:'18%', y:'78%', s:150, o:0.03}, {x:'84%', y:'82%', s:100, o:0.025} ];
+                counts.forEach(c=>{
+                    const el = document.createElement('span');
+                    el.className = 'bg-heart';
+                    el.style.left = c.x; el.style.top = c.y; el.style.width = c.s+'px'; el.style.height = c.s+'px'; el.style.opacity = c.o; el.style.fontSize = c.s+'px';
+                    container.appendChild(el);
+                });
+            }
+
+            createStaticBackgroundHearts();
+            window.addEventListener('scroll', onScroll, {passive:true});
+            window.addEventListener('touchmove', onScroll, {passive:true});
+        })();
     </script>
 </body>
 </html>
