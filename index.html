@@ -26,6 +26,7 @@
     </div>
 
     <div class="floating-hearts" aria-hidden="true"></div>
+    <div id="transitionOverlay" class="transition-overlay" aria-hidden="true"></div>
 
     <script>
         (function(){
@@ -33,11 +34,47 @@
             const form = document.getElementById('loginForm');
             const pass = document.getElementById('pass');
             const err = document.getElementById('error');
+            const overlay = document.getElementById('transitionOverlay');
+            const card = document.querySelector('.entrance-card');
 
             function showError(msg){
                 err.textContent = msg;
                 err.classList.add('shake');
                 setTimeout(()=> err.classList.remove('shake'), 600);
+            }
+
+            function playTransitionAndRedirect(){
+                // disable input
+                form.querySelector('button').disabled = true;
+                pass.disabled = true;
+                // gently shrink card for depth
+                card.classList.add('closing');
+                // show overlay
+                overlay.classList.add('play');
+
+                // spawn a cluster of hearts around the form center
+                const rect = form.getBoundingClientRect();
+                const cx = rect.left + rect.width/2;
+                const cy = rect.top + rect.height/2;
+                for(let i=0;i<12;i++){
+                    const h = document.createElement('span');
+                    h.className = 't-heart';
+                    const size = 8 + Math.random()*20;
+                    h.style.width = size+'px';
+                    h.style.height = size+'px';
+                    const dx = (Math.random()-0.5)*rect.width*0.7;
+                    const dy = (Math.random()-0.5)*rect.height*0.4;
+                    h.style.left = (cx + dx - size/2) + 'px';
+                    h.style.top = (cy + dy - size/2) + 'px';
+                    const hue = 330 + Math.round(Math.random()*18);
+                    h.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-8.5-6.1-8.5-11.2C3.5 6.3 6.7 4 9.3 4c1.6 0 2.7.9 2.7.9S13 4 14.7 4c2.6 0 5.8 2.3 5.8 5.8C20.5 14.9 12 21 12 21z" fill="hsla('+hue+',72%,64%,1)"/></svg>';
+                    overlay.appendChild(h);
+                    h.style.animationDelay = (Math.random()*0.6)+'s';
+                    h.addEventListener('animationend', ()=> h.remove());
+                }
+
+                // redirect after animation (~1.4s)
+                setTimeout(()=> window.location.href = 'celebration.html', 1400);
             }
 
             form.addEventListener('submit', function(e){
@@ -48,9 +85,7 @@
                     return;
                 }
                 if(val.toLowerCase() === correct){
-                    // small success animation then redirect
-                    document.querySelector('.entrance-card').style.transform = 'scale(0.98)';
-                    setTimeout(()=> window.location.href = 'celebration.html', 260);
+                    playTransitionAndRedirect();
                 } else {
                     pass.value = '';
                     showError('Wrong password, try again ❤️');
