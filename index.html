@@ -104,6 +104,7 @@
                 if(m.toLowerCase() === 'june' && d === '21' && y === '2025'){
                     playTransitionAndRedirect();
                 } else {
+                    document.getElementById('month').value = '';
                     document.getElementById('day').value = '';
                     document.getElementById('year').value = '';
                     showError('Wrong date, try again ❤️');
