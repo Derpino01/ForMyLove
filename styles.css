@@ -142,7 +142,7 @@ a{color:var(--purple-600)}
 .btn.primary:hover{transform:translateY(-3px) scale(1.02); filter:drop-shadow(0 12px 30px rgba(76,29,149,0.18))}
 
 @media (max-width:520px){
-  .entrance-card{padding:20px}
+  .entrance-card{padding:80px}
   .entrance-card .names{font-size:clamp(20px,6vw,30px)}
   .date-input{flex-basis:100%; max-width:100%}
   .date-inputs{gap:10px}
@@ -151,7 +151,7 @@ a{color:var(--purple-600)}
 
 /* Small visual tweaks for very large displays */
 @media (min-width:1400px){
-  .entrance-card{max-width:620px; padding:44px}
+  .entrance-card{max-width:620px; padding:88px}
   .names{font-size:56px}
 }
 
