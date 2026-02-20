@@ -1,0 +1,342 @@
+/* ============================================================
+   valentines-blush.css
+   Link this AFTER styles.css in your HTML <head>
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=DM+Serif+Display:ital@0;1&display=swap');
+
+/* ── Page background ─────────────────────────────────────── */
+.val-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 56px 24px 80px;
+  background: #fff5f7;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scattered hearts wallpaper */
+.val-page::before {
+  content: '♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡';
+  position: fixed;
+  inset: 0;
+  color: rgba(212, 96, 122, 0.06);
+  font-size: 30px;
+  line-height: 2.8;
+  letter-spacing: 14px;
+  word-spacing: 14px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Pink glow blobs */
+.val-page::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 80% 10%, rgba(255,182,193,0.45) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 10% 90%, rgba(255,192,203,0.3)  0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(255,240,245,0.6)  0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Nav row ─────────────────────────────────────────────── */
+.val-nav {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  gap: 12px;
+  align-self: flex-start;
+  margin-bottom: 40px;
+}
+
+/* Override existing .btn.outline and .btn.primary for this page */
+.val-page .btn.outline {
+  padding: 10px 28px;
+  border: 2px solid rgba(212,96,122,0.35);
+  background: rgba(255,255,255,0.75);
+  color: #d4607a;
+  border-radius: 999px;
+  font-family: 'Caveat', cursive;
+  font-size: 17px;
+  font-weight: 400;
+  backdrop-filter: blur(6px);
+  box-shadow: none;
+  transition: all .25s;
+}
+.val-page .btn.outline:hover {
+  border-color: #d4607a;
+  background: rgba(255,255,255,0.95);
+  transform: none;
+  box-shadow: none;
+}
+
+.val-page .btn.primary {
+  padding: 10px 28px;
+  background: #d4607a;
+  color: #fff;
+  border: 2px solid #d4607a;
+  border-radius: 999px;
+  font-family: 'Caveat', cursive;
+  font-size: 17px;
+  font-weight: 400;
+  box-shadow: 0 6px 20px rgba(212,96,122,0.3);
+  transition: all .25s;
+}
+.val-page .btn.primary:hover {
+  background: #c04d68;
+  border-color: #c04d68;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(212,96,122,0.4);
+  filter: none;
+}
+
+/* ── Sticker pill ─────────────────────────────────────────── */
+.val-sticker {
+  position: relative;
+  z-index: 10;
+  display: inline-block;
+  background: #d4607a;
+  color: #fff;
+  font-family: 'Caveat', cursive;
+  font-size: 15px;
+  padding: 6px 22px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(212,96,122,0.3);
+  transform: rotate(-1.5deg);
+  animation: val-float 3s ease-in-out infinite;
+}
+@keyframes val-float {
+  0%, 100% { transform: rotate(-1.5deg) translateY(0); }
+  50%       { transform: rotate(-1.5deg) translateY(-6px); }
+}
+
+/* ── Main title ───────────────────────────────────────────── */
+.val-title-main {
+  position: relative;
+  z-index: 10;
+  font-family: 'Caveat', cursive;
+  font-size: clamp(64px, 12vw, 108px);
+  font-weight: 700;
+  color: #d4607a;
+  text-align: center;
+  line-height: .95;
+  margin: 0 0 8px;
+  transform: rotate(-1.5deg);
+  text-shadow: 0 4px 24px rgba(212,96,122,0.15);
+}
+
+.val-title-sub {
+  position: relative;
+  z-index: 10;
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: clamp(18px, 3vw, 26px);
+  color: #a03050;
+  text-align: center;
+  margin: 0 0 40px;
+  opacity: .85;
+}
+
+/* ── Message card ─────────────────────────────────────────── */
+.val-msg-card {
+  position: relative;
+  z-index: 10;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(212,96,122,0.15);
+  border-radius: 24px;
+  padding: 36px 52px;
+  max-width: 580px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(212,96,122,0.1), 0 1px 0 rgba(255,255,255,0.8) inset;
+  margin-bottom: 56px;
+  transform: rotate(.5deg);
+}
+.val-msg-card::before {
+  content: '💌';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 32px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+.val-msg-card p {
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+  color: #6b2040;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ── Gallery section ──────────────────────────────────────── */
+.gallery-only {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 900px;
+}
+
+.gallery-title {
+  font-family: 'Caveat', cursive !important;
+  font-size: 38px !important;
+  font-weight: 700;
+  color: #d4607a !important;
+  text-align: center !important;
+  margin-bottom: 32px !important;
+  transform: rotate(-1deg);
+  display: block;
+}
+/* Remove the ❤ that the global h2::after adds */
+.gallery-only h2.gallery-title::after { display: none; }
+
+/* Override the global gallery-grid for blush layout */
+.gallery-only .gallery-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 !important;
+}
+
+/* ── Photo cards ──────────────────────────────────────────── */
+.gallery-only .photo-card {
+  background: rgba(255,255,255,0.78);
+  border: 2px solid rgba(212,96,122,0.15) !important;
+  border-radius: 20px !important;
+  overflow: hidden;
+  padding: 0 !important;
+  position: relative;
+  box-shadow: 0 8px 30px rgba(212,96,122,0.08) !important;
+  cursor: pointer;
+  margin-bottom: 0 !important;
+  /* Alternating tilts */
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s;
+}
+
+/* Tape strip */
+.gallery-only .photo-card::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 52px;
+  height: 20px;
+  background: rgba(212,96,122,0.22);
+  border-radius: 3px;
+  z-index: 5;
+}
+.gallery-only .photo-card:nth-child(even)::before {
+  transform: translateX(-50%) rotate(2deg);
+}
+
+/* Default tilts */
+.gallery-only .photo-card:nth-child(odd)  { transform: rotate(-1.2deg); }
+.gallery-only .photo-card:nth-child(even) { transform: rotate(1deg); }
+.gallery-only .photo-card:nth-child(3)    { transform: rotate(-0.5deg); }
+.gallery-only .photo-card:nth-child(5)    { transform: rotate(1.5deg); }
+
+.gallery-only .photo-card:hover {
+  transform: scale(1.04) rotate(0deg) !important;
+  box-shadow: 0 20px 50px rgba(212,96,122,0.22) !important;
+  z-index: 10;
+}
+
+.gallery-only .photo-card img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  border-radius: 0 !important;
+  max-height: none;
+}
+
+.gallery-only .photo-card figcaption {
+  padding: 12px 14px 16px;
+  background: rgba(255,255,255,0.92);
+  gap: 0;
+}
+
+/* Override love-letter paragraph inside blush cards */
+.gallery-only .love-letter {
+  font-family: 'Caveat', cursive !important;
+  font-size: 16px !important;
+  color: #c04d68 !important;
+  text-align: center !important;
+  border-top: none !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+}
+
+/* ── Reveal animation ─────────────────────────────────────── */
+/* Overrides the global .reveal / .reveal.visible */
+.gallery-only .reveal {
+  opacity: 0;
+  transform: translateY(28px) rotate(-1deg);
+  transition: opacity .6s ease, transform .6s cubic-bezier(.34,1.26,.64,1);
+  will-change: opacity, transform;
+}
+.gallery-only .reveal.visible {
+  opacity: 1;
+  transform: translateY(0) rotate(var(--r, -1.2deg));
+}
+.gallery-only .photo-card:nth-child(even).reveal.visible { --r: 1deg; }
+.gallery-only .photo-card:nth-child(3).reveal.visible    { --r: -0.5deg; }
+.gallery-only .photo-card:nth-child(5).reveal.visible    { --r: 1.5deg; }
+
+/* ── CTA button ───────────────────────────────────────────── */
+.val-cta-wrap {
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+}
+.btn-cta {
+  padding: 18px 60px;
+  background: #d4607a;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 10px 32px rgba(212,96,122,0.35);
+  transition: all .3s cubic-bezier(.34,1.56,.64,1);
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-cta:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 18px 48px rgba(212,96,122,0.45);
+  background: #c04d68;
+  color: #fff;
+}
+
+/* ── Footer ───────────────────────────────────────────────── */
+.val-footer-text {
+  position: relative;
+  z-index: 10;
+  margin-top: 48px;
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+  color: rgba(212, 96, 122, 0.6);
+  text-align: center;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .gallery-only .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .val-msg-card { padding: 28px 24px; }
+  .val-title-main { font-size: 72px; }
+}
+@media (max-width: 400px) {
+  .gallery-only .gallery-grid { grid-template-columns: 1fr; }
+}

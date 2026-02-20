@@ -1,52 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Valentine</title>
-    <link rel="stylesheet" href="styles.css">
-    
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy Valentine's 💌</title>
+
+  <!-- 1. Your existing global styles -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- 2. Blush theme overrides (loads after so it wins) -->
+  <link rel="stylesheet" href="valentines-blush.css">
 </head>
 <body>
-    <div class="val-page">
-        <main class="val-card">
-            <h1>Happy Valentine's Baby ko</h1>
-            <p>To my one and only — every day with you feels like a gift. Thank you for being my light and my home. Happy Valentine's Day, baby.</p>
-            <div class="val-actions">
-                <a class="btn outline" href="celebration.html">Back</a>
-                <a class="btn primary" href="index.html">Home</a>
-            </div>
-            
-            <section class="gallery-only" style="margin-top:28px">
-                <h2 class="gallery-title">Valentine Moments</h2>
-                <div class="gallery-grid">
-                    <figure class="photo-card">
-                        <img src="1.jpeg" alt="Moment 1">
-                        <figcaption><p class="love-letter">Moment 1</p></figcaption>
-                    </figure>
-                    <figure class="photo-card">
-                        <img src="1.jpeg" alt="Moment 2">
-                        <figcaption><p class="love-letter">Moment 2</p></figcaption>
-                    </figure>
-                    <figure class="photo-card">
-                        <img src="1.jpeg" alt="Moment 3">
-                        <figcaption><p class="love-letter">Moment 3</p></figcaption>
-                    </figure>
-                    <figure class="photo-card">
-                        <img src="1.jpeg" alt="Moment 4">
-                        <figcaption><p class="love-letter">Moment 4</p></figcaption>
-                    </figure>
-                    <figure class="photo-card">
-                        <img src="1.jpeg" alt="Moment 5">
-                        <figcaption><p class="love-letter">Moment 5</p></figcaption>
-                    </figure>
-                    <figure class="photo-card">
-                        <img src="1.jpeg" alt="Moment 6">
-                        <figcaption><p class="love-letter">Moment 6</p></figcaption>
-                    </figure>
-                </div>
-            </section>
-        </main>
+
+  <div class="val-page">
+
+    <!-- Navigation -->
+    <div class="val-nav">
+      <a class="btn outline" href="celebration.html">← Back</a>
+      <a class="btn primary" href="index.html">🏠 Home</a>
     </div>
+
+    <!-- Header -->
+    <span class="val-sticker">💌 made just for you</span>
+    <h1 class="val-title-main">Happy<br>Valentine's!</h1>
+    <p class="val-title-sub">— a little page full of love —</p>
+
+    <!-- Message card -->
+    <div class="val-msg-card">
+      <p>To my one and only — every day with you feels like a gift.
+         Thank you for being my light and my home.
+         Happy Valentine's Day, baby. 🩷</p>
+    </div>
+
+    <!-- Gallery -->
+    <section class="gallery-only">
+      <h2 class="gallery-title">💕 Our Valentine Moments</h2>
+
+      <div class="gallery-grid">
+
+        <figure class="photo-card reveal">
+          <img src="1.jpeg" alt="Moment 1">
+          <figcaption>
+            <p class="love-letter">Moment 1 ✨</p>
+          </figcaption>
+        </figure>
+
+        <figure class="photo-card reveal">
+          <img src="2.jpeg" alt="Moment 2">
+          <figcaption>
+            <p class="love-letter">Moment 2 🌸</p>
+          </figcaption>
+        </figure>
+
+        <figure class="photo-card reveal">
+          <img src="3.jpeg" alt="Moment 3">
+          <figcaption>
+            <p class="love-letter">Moment 3 🌹</p>
+          </figcaption>
+        </figure>
+
+        <figure class="photo-card reveal">
+          <img src="4.jpeg" alt="Moment 4">
+          <figcaption>
+            <p class="love-letter">Moment 4 💕</p>
+          </figcaption>
+        </figure>
+
+        <figure class="photo-card reveal">
+          <img src="5.jpeg" alt="Moment 5">
+          <figcaption>
+            <p class="love-letter">Moment 5 ☀️</p>
+          </figcaption>
+        </figure>
+
+        <figure class="photo-card reveal">
+          <img src="6.jpeg" alt="Moment 6">
+          <figcaption>
+            <p class="love-letter">Moment 6 🫶</p>
+          </figcaption>
+        </figure>
+
+      </div>
+
+      <div class="val-cta-wrap">
+        <a class="btn-cta" href="celebration.html">🎉 See the Celebration</a>
+      </div>
+    </section>
+
+    <div class="val-footer-text">with all my love ♥</div>
+
+  </div><!-- /.val-page -->
+
+  <script>
+    // Reveal cards as they scroll into view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.1) + 's';
+      observer.observe(el);
+    });
+
+    // Fallback: force all visible after 800ms
+    // (fixes cards already in viewport on load)
+    setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }, 800);
+  </script>
+
 </body>
 </html>
