@@ -167,6 +167,10 @@ a{color:var(--purple-600)}
 .photo-month::before{content:'— '; color:var(--purple-400); margin-right:6px}
 .photo-month::after{content:' —'; color:var(--purple-400); margin-left:6px}
 
+/* Make linked month labels look clickable but inherit styling */
+.photo-month[href]{text-decoration:none; color:inherit}
+.photo-month[href]:hover{color:var(--purple-800)}
+
 /* Soft hover and focus */
 .photo-card:hover{transform:translateY(-6px); transition:transform .22s ease, box-shadow .22s ease}
 .photo-card:focus-within{box-shadow:0 18px 40px rgba(76,29,149,0.14)}
